@@ -11,54 +11,10 @@ h2 {
   font-family: 'Black Ops One', cursive;
 }
 
-button {
-  background-image: linear-gradient(#f7f8fa ,#e7e9ec);
-  border-color: #adb1b8 #a2a6ac #8d9096;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
-  box-sizing: border-box;
-  color: #0f1111;
-  cursor: pointer;
-  font-size: 15px;
-  height: 29px;
-  margin: 5px 5px;
-  outline: 0;
-  overflow: hidden;
-  padding: 0 11px;
-  text-align: center;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-}
-button:disabled{
-  background-color: #939393;
-  color: #939393;
-}
-button:active {
-  border-bottom-color: #a2a6ac;
-}
-
-button:active:hover {
-  border-bottom-color: #a2a6ac;
-}
-
-button:hover {
-  border-color: #a2a6ac #979aa1 #82858a;
-}
-
-button:focus {
-  -webkit-box-shadow: 0px 0px 7px 1px #69aed6; 
-  box-shadow: 0px 0px 7px 1px #69aed6;
-}
-
 #content {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .grid-container {
   height: 100vh;
@@ -112,6 +68,50 @@ display: block;
 #orientation-container {
   text-align: center;
   margin: 10px 0px;
+}
+button {
+  background-image: linear-gradient(#f7f8fa ,#e7e9ec);
+  border-color: #adb1b8 #a2a6ac #8d9096;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  font-size: 15px;
+  height: 29px;
+  margin: 5px 5px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 11px;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+button:disabled{
+  background-color: #939393;
+  color: #939393;
+}
+button:active {
+  border-bottom-color: #a2a6ac;
+}
+
+button:active:hover {
+  border-bottom-color: #a2a6ac;
+}
+
+button:hover {
+  border-color: #a2a6ac #979aa1 #82858a;
+}
+
+button:focus {
+  -webkit-box-shadow: 0px 0px 7px 1px #69aed6; 
+  box-shadow: 0px 0px 7px 1px #69aed6;
 }
 
 #rules-buttons-container {
@@ -180,8 +180,21 @@ li {
 }
 
 @media only screen and (max-width: 1200px) {
-  body {
-    background-color: lightblue;
+  #rules-buttons-container{
+    order: 3;
+  }
+  .grid-container {
+    height: 700px;
+  }
+
+  #rules-buttons-container {
+    height: auto;
+    padding: 0px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #rules-buttons-container{
+    order: 3;
   }
 }
 
