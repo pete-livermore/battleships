@@ -146,10 +146,7 @@ function init() {
     compGridItems.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss', 'comp'))
     shipChoice.innerHTML = ''
     playerShips = startingPlayerShips.map(ship => ({ ...ship }))
-    console.log('player ships =>', playerShips)
-    console.log(startingPlayerShips)
     compShips = startingCompShips.map(ship => ({ ...ship }))
-    console.log('cpu ships =>', compShips)
     audio.src = ''
   }
   resetButton.addEventListener('click', resetGame)
@@ -229,7 +226,6 @@ function init() {
               audio.volume = 0.2
               audio.play()
               playerShip.used++
-              console.log('number of times ship used =>', playerShip.used)
               shipButtons.forEach(btn => {
                 if (btn.id !== 'clicked') {
                   btn.disabled = false
@@ -239,8 +235,6 @@ function init() {
               shipSelectButton.disabled = true
             }
             if (playerShips.every(ship => ship.used === 1)) {
-              console.log('all ships used!')
-              console.log('is button disabled? =>', compShipButton.disabled)
               compShipButton.disabled = false
               shipChoice.innerHTML = ''
               rotationText.innerHTML = ''
@@ -334,7 +328,7 @@ function init() {
         const shipName = e.target.classList[1]
         const index = compShips.findIndex(ship => ship.name === shipName)
         compShips[index].hits++
-        audio.src = '/sounds/mixkit-sea-mine-explosion-1184.wav'
+        audio.src = 'sounds/mixkit-sea-mine-explosion-1184.wav'
         audio.volume = 0.2
         audio.play()
         startButtonContainer.innerHTML = `Computer ${compShips[index].name} is hit!`
@@ -384,7 +378,7 @@ function init() {
       } else if (!randomTarget.classList.contains('used') && !randomTarget.classList.contains('targeted')) {
         randomTarget.classList.add('miss', 'targeted')
         shipChoice.innerHTML = '<p>Miss!</p>'
-        audio.src = '/sounds/Water_Splash_1.mp3'
+        audio.src = 'sounds/Water_Splash_1.mp3'
         audio.volume = 0.2
         audio.play()
       } else {
