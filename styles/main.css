@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+h2 {
+  font-family: 'Black Ops One', cursive;
+}
+
+button {
+  background-image: linear-gradient(#f7f8fa ,#e7e9ec);
+  border-color: #adb1b8 #a2a6ac #8d9096;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  font-size: 15px;
+  height: 29px;
+  margin: 5px 5px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 11px;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+button:disabled{
+  background-color: #939393;
+  color: #939393;
+}
+button:active {
+  border-bottom-color: #a2a6ac;
+}
+
+button:active:hover {
+  border-bottom-color: #a2a6ac;
+}
+
+button:hover {
+  border-color: #a2a6ac #979aa1 #82858a;
+}
+
+button:focus {
+  -webkit-box-shadow: 0px 0px 7px 1px #69aed6; 
+  box-shadow: 0px 0px 7px 1px #69aed6;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+}
+.grid-container {
+  height: 100vh;
+  flex-grow: 2;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  justify-content:flex-start;
+  align-items: center;
+}
+.grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 350px;
+  width: 350px;
+  background-color: #69aed6;
+  
+}
+
+.grid div {
+  height: 10%;
+  width: 10%;
+  border: 1px solid #dfdddd;
+}
+
+#ship-choice-container {
+  text-align: center;
+  width: 350px;
+}
+#ship-choice-container p {
+display: block;
+}
+
+#ship-choice-buttons-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 350px;
+
+}
+.ship-choice {
+  padding: 5px;
+  display: block;
+}
+
+#orientation-container {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+#rules-buttons-container {
+  height: 100vh;
+  flex-grow: 1;
+  background-image: url('/images/navy.jpeg');
+  background-position: center;
+  opacity: 0.9;
+  padding: 50px 10px;
+}
+#rules-buttons {
+  margin: 0 auto;
+  padding: 15px;
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+#rules-text {
+  font-family: 'Black Ops One', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+li {
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+#control-button-container {
+  text-align: center;
+}
+#control-button-container button {
+  padding: 5px;
+}
+#start-button-container {
+  margin: 10px 0px;
+}
+.carrier {
+  background-color: #939393;
+}
+.destroyer {
+  background-color: #939393;
+}
+.battleship {
+  background-color: #939393;
+}
+.submarine {
+  background-color: #939393;
+}
+.patrol {
+  background-color: #939393;
+}
+.hover {
+  background-color: #D3D3D3;
+}
+.comp {
+  background-color: #69aed6;
+}
+.target-hover {
+  background-color: #2078aa;
+}
+.hit {
+  background-color: #aa2027;
+}
+.miss {
+  background-color: #ffffff;
+}
+
+@media only screen and (max-width: 1200px) {
+  body {
+    background-color: lightblue;
+  }
+}
+

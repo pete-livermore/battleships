@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <audio id="audio"></audio>
+      <div class="grid-container">
+        <h2>Player</h2>
+        <div class="grid" id="player"></div>
+        <div id="ship-choice-container"></div>
+        <div id="orientation-container"></div>
+      </div>
+      <div id="rules-buttons-container">
+        <div id="rules-buttons">
+          <p id="rules-text">Battleships rules:</p>
+          <ol>
+            <li>Click "Set up game"</li>
+            <li>Select your ship</li>
+            <li>Select the orientation of each ship</li>
+            <li>Place your ships</li>
+            <li>Generate the computer's grid</li>
+            <li>Click "Start game" and fire away!</li>
+          </ol>
+          <div id="control-button-container">
+            <button id="set-up">Set up game</button>
+            <button id="start">Start game</button>
+            <button id="reset">Reset game</button>
+          </div>
+        </div>
+      </div>
+      <div class="grid-container">
+        <h2>Computer</h2>
+        <div class="grid" id="computer"></div>
+        <div id="start-button-container">
+          <p></p>
+          <button class="comp-ship">Generate computer's ships</button>
+        </div>
+      </div>
+    </div>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+  </body>
+</html>
