@@ -225,7 +225,7 @@ function init() {
               const arr = Array.from(playerGridItems)
               const newArr = arr.filter(div => div.classList.contains('hover'))
               newArr.forEach(div => playerGridItems[div.id].classList.add('used', playerShip.name))
-              audio.src = '/sounds/mixkit-video-game-mystery-alert-234.wav'
+              audio.src = 'sounds/mixkit-video-game-mystery-alert-234.wav'
               audio.volume = 0.2
               audio.play()
               playerShip.used++
@@ -346,7 +346,7 @@ function init() {
       if (!e.target.classList.contains('hit') && !e.target.classList.contains('miss')) {
         e.target.classList.add('miss')
         startButtonContainer.innerHTML = 'Miss!'
-        audio.src = '/sounds/Water_Splash_1.mp3'
+        audio.src = 'sounds/Water_Splash_1.mp3'
         audio.volume = 0.2
         audio.play()
       }
@@ -372,7 +372,7 @@ function init() {
         randomTarget.classList.add('hit', 'targeted')
         const playerShipHit = randomTarget.classList[1]
         const index = playerShips.findIndex(ship => ship.name === playerShipHit)
-        audio.src = '/sounds/mixkit-sea-mine-explosion-1184.wav'
+        audio.src = 'sounds/mixkit-sea-mine-explosion-1184.wav'
         audio.volume = 0.2
         audio.play()
         playerShips[index].hits++

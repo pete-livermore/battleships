@@ -117,7 +117,7 @@ button:focus {
 #rules-buttons-container {
   height: 100vh;
   flex-grow: 1;
-  background-image: url('../images/navy.jpeg');
+  background-image: url('images/navy.jpeg');
   background-position: center;
   opacity: 0.9;
   padding: 50px 10px;
