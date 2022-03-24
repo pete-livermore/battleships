@@ -3,10 +3,7 @@ function init() {
   const gridWidth = 10
   const gridSize = gridWidth * gridWidth
   const cells = []
-  const compShipButton = document.querySelector('.comp-ship')
-  compShipButton.disabled = true
   const audio = document.getElementById('audio')
-
   const startingPlayerShips = [
     {
       name: 'carrier',
@@ -119,8 +116,7 @@ function init() {
   const startButtonContainer = document.querySelector('#start-button-container')
   const controlButtonContainer = document.querySelector('#control-button-container')
   const rulesContainer = document.getElementById('rules-buttons')
-
-
+  const compShipDiv = document.querySelector('.comp-ship-button')
 
   // Creating player and computer grids
 
@@ -139,11 +135,9 @@ function init() {
   })
 
   const playerGrid = document.querySelectorAll('.player')
-  console.log(playerGrid)
   const compGrid = document.querySelectorAll('.computer')
 
-
-
+  // Creating rules and welcome text
   function rulesText() {
     const rulesHeader = document.createElement('p')
     rulesHeader.id = 'rules-text'
@@ -190,8 +184,6 @@ function init() {
       index++
       const listItem = orderedList.appendChild(document.createElement('li'))
       listItem.innerText = arr[index]
-      console.log('times run =>', timesRun)
-      // str = arr
       timesRun++
       const nIntervId = setTimeout(populateOrderedList, 1500)
       if (timesRun === 4) {
@@ -215,21 +207,22 @@ function init() {
   const setUpButton = controlButtonContainer.children[0]
   const startButton = controlButtonContainer.children[1]
   const resetButton = controlButtonContainer.children[2]
-  resetButton.addEventListener('click', resetGame)
 
 
   // Function for reset button
   function resetGame() {
     setUpButton.disabled = false
     startButton.disabled = true
-    compShipButton.disabled = true
     playerGrid.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss'))
     compGrid.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss', 'comp'))
+    rotationText.innerHTML = ''
     shipChoice.innerHTML = ''
     playerShips = startingPlayerShips.map(ship => ({ ...ship }))
     compShips = startingCompShips.map(ship => ({ ...ship }))
     audio.src = ''
+    startButtonContainer.innerHTML = '<p></p><div class="comp-ship-button"></div>'
   }
+  resetButton.addEventListener('click', resetGame)
 
   function setUpGame(e) {
     playerShips = startingPlayerShips.map(ship => ({ ...ship }))
@@ -268,8 +261,6 @@ function init() {
           rotationButtons.forEach(btn => btn.classList.remove('selected-button'))
           playerShipRotation = e.target.innerText
           e.target.classList.add('selected-button')
-          console.log('player ship', playerShip)
-          console.log('rotation', playerShipRotation)
 
           // Function for allowing hover over cells to display potential placement of player ship
           function addPlayerShip(e) {
@@ -281,7 +272,6 @@ function init() {
             if (playerShipRotation === 'Vertical') {
               currentLocation = playerShip.directions[1]
             }
-            console.log(e.target.children)
             const isTaken = currentLocation.some(index => playerGrid[startLocation + index].classList.contains('used'))
             const atRightEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === gridWidth - 1)
             const atLeftEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === 0)
@@ -318,18 +308,18 @@ function init() {
               shipSelectButton.disabled = true
             }
             if (playerShips.every(ship => ship.used === 1)) {
-              compShipButton.disabled = false
+              compShipDiv.innerHTML = '<button class="comp-ship">Generate computer\'s ships</button>'
+              compShipDiv.children[0].addEventListener('click', addComputerShips)
               shipChoice.innerHTML = ''
               rotationText.innerHTML = ''
             }
             playerGrid.forEach(div => div.removeEventListener('mouseenter', addPlayerShip))
-            removeRotation()
             function removeRotation() {
               rotationText.innerHTML = ''
             }
+            removeRotation()
           }
           playerGrid.forEach(div => div.addEventListener('click', shipClick))
-
         }
         rotationButtons.forEach(btn => btn.addEventListener('click', selectRotation))
       }
@@ -338,11 +328,9 @@ function init() {
     }
     addshipChoice()
 
-
-
-
     // Function for randomly generating computers ships on board
     function addComputerShips() {
+      document.querySelector('.comp-ship').disabled = true
       rotationText.innerHTML = ''
       function addShip(compShip) {
         const randomDirection = parseFloat(Math.floor(Math.random() * compShip.directions.length))
@@ -358,7 +346,6 @@ function init() {
         const isTaken = current.some(index => compGrid[randomStart + index].classList.contains('used'))
         const atRightEdge = current.some(index => (randomStart + index) % gridWidth === gridWidth - 1)
         const atLeftEdge = current.some(index => (randomStart + index) % gridWidth === 0)
-
         if (!isTaken && (!atRightEdge || !atLeftEdge)) {
           current.forEach(index => {
             compGrid[randomStart + index].classList.add('used', compShip.name, 'comp')
@@ -368,14 +355,8 @@ function init() {
         }
         startButton.disabled = false
       }
-
       compShips.forEach(ship => addShip(ship))
-      compShipButton.disabled = true
-
     }
-
-    compShipButton.addEventListener('click', addComputerShips)
-
   }
 
   setUpButton.addEventListener('click', setUpGame)
@@ -404,7 +385,7 @@ function init() {
     function fire(e) {
       if (e.target.classList.contains('used') && !e.target.classList.contains('hit') && !e.target.classList.contains('miss')) {
         e.target.classList.add('hit')
-        const shipName = e.target.classList[1]
+        const shipName = e.target.classList[2]
         const index = compShips.findIndex(ship => ship.name === shipName)
         compShips[index].hits++
         audio.src = 'sounds/mixkit-sea-mine-explosion-1184.wav'
@@ -443,7 +424,7 @@ function init() {
       const randomTarget = playerGrid[Math.floor(Math.random() * playerGrid.length)]
       if (randomTarget.classList.contains('used') && !randomTarget.classList.contains('targeted')) {
         randomTarget.classList.add('hit', 'targeted')
-        const playerShipHit = randomTarget.classList[1]
+        const playerShipHit = randomTarget.classList[2]
         const index = playerShips.findIndex(ship => ship.name === playerShipHit)
         audio.src = 'sounds/mixkit-sea-mine-explosion-1184.wav'
         audio.volume = 0.2
@@ -470,9 +451,6 @@ function init() {
         compGrid.forEach(div => div.removeEventListener('click', fire))
       }
     }
-
-
-
   }
   startButton.addEventListener('click', startGame)
 
