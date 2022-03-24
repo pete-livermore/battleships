@@ -1,6 +1,5 @@
 # Battleships - a turn-based vanilla JavaScript game | GA project 1
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648136736/Habit_tracker_app/Screenshot_2022-03-24_at_15.45.15_ib8gdw.png "Battleships game")
+https://user-images.githubusercontent.com/96052888/159977037-638b484b-bb8d-4023-9e07-8e36b0c0f5e2.mov
 
 In this implementation of [Battleships](https://en.wikipedia.org/wiki/Battleship_(game)), a single player can add their fleet of ships to a game board, randomly generate a ship layout for the computer, and then the player and computer alternate turns in firing at each other's boards - with hits show in red and misses in white. Once all ships on either board have been sunk, the game ends and a victor is declared.
 
