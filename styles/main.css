@@ -15,20 +15,23 @@ h2 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  background-color: rgb(19, 19, 19);
+  color: #fff;
 }
+
 .grid-container {
   height: 100vh;
   flex-grow: 2;
   min-width: 400px;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
-  justify-content:flex-start;
+  /* background-color: #fafafa; */
+  justify-content: flex-start;
   align-items: center;
 }
 .grid {
   align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px 0 rgba(105, 174, 214, 0.4);
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -36,7 +39,6 @@ h2 {
   height: 350px;
   width: 350px;
   background-color: #69aed6;
-  
 }
 
 .grid div {
@@ -50,7 +52,7 @@ h2 {
   width: 350px;
 }
 #ship-choice-container p {
-display: block;
+  display: block;
 }
 
 #ship-choice-buttons-container {
@@ -58,7 +60,6 @@ display: block;
   justify-content: center;
   flex-wrap: wrap;
   width: 350px;
-
 }
 .ship-choice {
   padding: 5px;
@@ -70,12 +71,12 @@ display: block;
   margin: 10px 0px;
 }
 button {
-  background-image: linear-gradient(#f7f8fa ,#e7e9ec);
+  background-image: linear-gradient(#f7f8fa, #e7e9ec);
   border-color: #adb1b8 #a2a6ac #8d9096;
   border-style: solid;
   border-width: 1px;
   border-radius: 3px;
-  box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+  box-shadow: rgba(255, 255, 255, 0.6) 0 1px 0 inset;
   box-sizing: border-box;
   color: #0f1111;
   cursor: pointer;
@@ -93,9 +94,9 @@ button {
   touch-action: manipulation;
   white-space: nowrap;
 }
-button:disabled{
+button:disabled {
   background-color: #939393;
-  color: #939393;
+  color: #acacac;
 }
 button:active {
   border-bottom-color: #a2a6ac;
@@ -110,14 +111,14 @@ button:hover {
 }
 
 button:focus {
-  -webkit-box-shadow: 0px 0px 7px 1px #69aed6; 
+  -webkit-box-shadow: 0px 0px 7px 1px #69aed6;
   box-shadow: 0px 0px 7px 1px #69aed6;
 }
 
 #rules-buttons-container {
-  height: 100vh;
+  /* height: 100vh; */
   flex-grow: 1;
-  background-image: url('../images/navy.jpeg');
+  /* background-image: url('../images/navy.jpeg'); */
   background-position: center;
   opacity: 0.9;
   padding: 50px 10px;
@@ -126,7 +127,8 @@ button:focus {
   margin: 0 auto;
   padding: 15px;
   width: 90%;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000;
 }
 #rules-text {
   font-family: 'Black Ops One', cursive;
@@ -164,7 +166,7 @@ li {
   background-color: #939393;
 }
 .hover {
-  background-color: #D3D3D3;
+  background-color: #d3d3d3;
 }
 .comp {
   background-color: #69aed6;
@@ -180,21 +182,46 @@ li {
 }
 
 @media only screen and (max-width: 1200px) {
-  #rules-buttons-container{
+  #rules-buttons-container {
     order: 3;
   }
   .grid-container {
+    flex-grow: 1;
+    width: 50%;
     height: 700px;
+    order: 2;
   }
 
   #rules-buttons-container {
     height: auto;
+    background-image: none;
+    width: 100%;
     padding: 0px;
+    order: 1;
+  }
+  #rules-buttons {
+    padding: 5px;
+    margin-top: 5px;
+    width: 90%;
+    background-color: #f5f5f5;
+  }
+  li {
+    line-height: 0.5;
+    font-size: 15px;
+  }
+  ol {
+    width: 500px;
   }
 }
-@media only screen and (max-width: 600px) {
-  #rules-buttons-container{
-    order: 3;
+@media only screen and (max-width: 820px) {
+  .grid-container {
+    /* flex-grow: 1; */
+    width: 100%;
+  }
+  #rules-buttons-container {
+    order: 1;
+  }
+  .grid-container {
+    order: 2;
   }
 }
-

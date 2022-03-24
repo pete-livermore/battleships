@@ -16,7 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/main.css" />
     <script src="scripts/app.js"></script>
   </head>
@@ -25,31 +28,22 @@
       <audio id="audio"></audio>
       <div class="grid-container">
         <h2>Player</h2>
-        <div class="grid" id="player"></div>
+        <div class="grid"></div>
         <div id="ship-choice-container"></div>
         <div id="orientation-container"></div>
       </div>
       <div id="rules-buttons-container">
         <div id="rules-buttons">
-          <p id="rules-text">Battleships rules:</p>
-          <ol>
-            <li>Click "Set up game"</li>
-            <li>Select your ship</li>
-            <li>Select the orientation of each ship</li>
-            <li>Place your ships</li>
-            <li>Generate the computer's grid</li>
-            <li>Click "Start game" and fire away!</li>
-          </ol>
           <div id="control-button-container">
-            <button id="set-up">Set up game</button>
-            <button id="start">Start game</button>
-            <button id="reset">Reset game</button>
+            <button id="set-up">Set up game</button
+            ><button id="start" disabled="true">Start game</button
+            ><button id="reset">Reset game</button>
           </div>
         </div>
       </div>
       <div class="grid-container">
         <h2>Computer</h2>
-        <div class="grid" id="computer"></div>
+        <div class="grid"></div>
         <div id="start-button-container">
           <p></p>
           <button class="comp-ship">Generate computer's ships</button>

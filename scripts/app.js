@@ -3,12 +3,10 @@ function init() {
   const gridWidth = 10
   const gridSize = gridWidth * gridWidth
   const cells = []
-  const setUpButton = document.querySelector('#set-up')
-  const startButton = document.querySelector('#start')
-  startButton.disabled = true
   const compShipButton = document.querySelector('.comp-ship')
   compShipButton.disabled = true
   const audio = document.getElementById('audio')
+
   const startingPlayerShips = [
     {
       name: 'carrier',
@@ -114,42 +112,124 @@ function init() {
     }
   ]
 
+  let playerShips = []
+  let compShips = startingCompShips.map(ship => ({ ...ship }))
+  const rotationText = document.querySelector('#orientation-container')
+  const shipChoice = document.querySelector('#ship-choice-container')
+  const startButtonContainer = document.querySelector('#start-button-container')
+  const controlButtonContainer = document.querySelector('#control-button-container')
+  const rulesContainer = document.getElementById('rules-buttons')
+
+
+
   // Creating player and computer grids
 
-  grids.forEach(div => {
-    return createGrid(div)
-  })
-
-  function createGrid(grid) {
+  function createGrid(grid, index) {
     for (let i = 0; i < gridSize; i++) {
       const cell = document.createElement('div')
       cell.id = i
+      if (index < 1) cell.classList.add('player')
+      else cell.classList.add('computer')
       grid.appendChild(cell)
       cells.push(cell)
     }
   }
-  let playerShips = []
-  let compShips = startingCompShips.map(ship => ({ ...ship }))
-  const playerGridItems = document.querySelectorAll('#player div')
-  const compGridItems = document.querySelectorAll('#computer div')
-  const rotationText = document.querySelector('#orientation-container')
-  const shipChoice = document.querySelector('#ship-choice-container')
-  const startButtonContainer = document.querySelector('#start-button-container')
+  grids.forEach((div, index) => {
+    return createGrid(div, index)
+  })
+
+  const playerGrid = document.querySelectorAll('.player')
+  console.log(playerGrid)
+  const compGrid = document.querySelectorAll('.computer')
+
+
+
+  function rulesText() {
+    const rulesHeader = document.createElement('p')
+    rulesHeader.id = 'rules-text'
+    const orderedList = document.createElement('ol')
+    rulesContainer.prepend(rulesHeader, orderedList)
+
+    const txtChoice = ['Welcome to battleships!', 'Here are the rules:']
+    let textPosition = 0
+    let quoteArray
+
+
+    function addWelcomeText() {
+      quoteArray = [txtChoice[0]]
+      rulesHeader.innerHTML = quoteArray[0].substring(0, textPosition)
+      if (textPosition++ !== quoteArray[0].length) {
+        setTimeout(addWelcomeText, 100)
+      }
+
+    }
+    addWelcomeText()
+
+    function removeText() {
+      rulesHeader.innerHTML = '<p></p>'
+      textPosition = 0
+      quoteArray = [txtChoice[1]]
+      setTimeout(addRulesText, 200)
+    }
+    setTimeout(removeText, 2600)
+
+    function addRulesText() {
+      rulesHeader.innerHTML = quoteArray[0].substring(0, textPosition)
+      if (textPosition++ !== quoteArray[0].length) {
+        setTimeout(addRulesText, 100)
+      }
+    }
+
+    let timesRun = 0
+    const arr = ['Click "set up game"', 'Select your ships and place on grid', 'Generate the computers ships', 'Click "start game" and fire away!']
+    let index = -1
+
+    setTimeout(populateOrderedList, 5000)
+
+    function populateOrderedList() {
+      index++
+      const listItem = orderedList.appendChild(document.createElement('li'))
+      listItem.innerText = arr[index]
+      console.log('times run =>', timesRun)
+      // str = arr
+      timesRun++
+      const nIntervId = setTimeout(populateOrderedList, 1500)
+      if (timesRun === 4) {
+        window.clearTimeout(nIntervId)
+      }
+    }
+
+    function hideButtons() {
+      controlButtonContainer.style.display = 'none'
+      setTimeout(generateButtons, 10500)
+    }
+    hideButtons()
+
+    function generateButtons() {
+      controlButtonContainer.style.display = 'block'
+    }
+  }
+  rulesText()
+
+
+  const setUpButton = controlButtonContainer.children[0]
+  const startButton = controlButtonContainer.children[1]
+  const resetButton = controlButtonContainer.children[2]
+  resetButton.addEventListener('click', resetGame)
+
 
   // Function for reset button
-  const resetButton = document.querySelector('#reset')
   function resetGame() {
     setUpButton.disabled = false
     startButton.disabled = true
     compShipButton.disabled = true
-    playerGridItems.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss'))
-    compGridItems.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss', 'comp'))
+    playerGrid.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss'))
+    compGrid.forEach(div => div.classList.remove('used', 'carrier', 'battleship', 'destroyer', 'submarine', 'patrol', 'hit', 'miss', 'comp'))
     shipChoice.innerHTML = ''
     playerShips = startingPlayerShips.map(ship => ({ ...ship }))
     compShips = startingCompShips.map(ship => ({ ...ship }))
     audio.src = ''
   }
-  resetButton.addEventListener('click', resetGame)
 
   function setUpGame(e) {
     playerShips = startingPlayerShips.map(ship => ({ ...ship }))
@@ -176,18 +256,20 @@ function init() {
             btn.disabled = true
           }
         })
-
-        addRotation()
-        const rotationButtons = document.querySelectorAll('.orientation')
+        // This adds rotation text
         function addRotation() {
           rotationText.innerHTML = '<p>Select an orientation</p><button class="orientation" id="horizontal">Horizontal</button><button class="orientation" id="vertical">Vertical</button>'
         }
+        addRotation()
+        const rotationButtons = document.querySelectorAll('.orientation')
 
         // Function for select rotation of ship
         function selectRotation(e) {
           rotationButtons.forEach(btn => btn.classList.remove('selected-button'))
           playerShipRotation = e.target.innerText
           e.target.classList.add('selected-button')
+          console.log('player ship', playerShip)
+          console.log('rotation', playerShipRotation)
 
           // Function for allowing hover over cells to display potential placement of player ship
           function addPlayerShip(e) {
@@ -199,12 +281,13 @@ function init() {
             if (playerShipRotation === 'Vertical') {
               currentLocation = playerShip.directions[1]
             }
-            const isTaken = currentLocation.some(index => playerGridItems[startLocation + index].classList.contains('used'))
+            console.log(e.target.children)
+            const isTaken = currentLocation.some(index => playerGrid[startLocation + index].classList.contains('used'))
             const atRightEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === gridWidth - 1)
             const atLeftEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === 0)
             if (!isTaken && (!atRightEdge || !atLeftEdge)) {
               currentLocation.forEach(index => {
-                playerGridItems[startLocation + index].classList.add('hover')
+                playerGrid[startLocation + index].classList.add('hover')
               })
             }
             // Function for removing hover over cells
@@ -212,16 +295,16 @@ function init() {
               const hoveredCells = document.querySelectorAll('.hover')
               hoveredCells.forEach(item => item.classList.remove('hover'))
             }
-            playerGridItems.forEach(div => div.addEventListener('mouseleave', mouseleave))
+            playerGrid.forEach(div => div.addEventListener('mouseleave', mouseleave))
           }
-          playerGridItems.forEach(div => div.addEventListener('mouseenter', addPlayerShip))
+          playerGrid.forEach(div => div.addEventListener('mouseenter', addPlayerShip))
 
           // Function for placing the players ships on click
           function shipClick() {
             if (playerShip.used === 0) {
-              const arr = Array.from(playerGridItems)
+              const arr = Array.from(playerGrid)
               const newArr = arr.filter(div => div.classList.contains('hover'))
-              newArr.forEach(div => playerGridItems[div.id].classList.add('used', playerShip.name))
+              newArr.forEach(div => playerGrid[div.id].classList.add('used', playerShip.name))
               audio.src = 'sounds/mixkit-video-game-mystery-alert-234.wav'
               audio.volume = 0.2
               audio.play()
@@ -239,19 +322,16 @@ function init() {
               shipChoice.innerHTML = ''
               rotationText.innerHTML = ''
             }
-            playerGridItems.forEach(div => div.removeEventListener('mouseenter', addPlayerShip))
+            playerGrid.forEach(div => div.removeEventListener('mouseenter', addPlayerShip))
             removeRotation()
             function removeRotation() {
               rotationText.innerHTML = ''
             }
           }
-          playerGridItems.forEach(div => div.addEventListener('click', shipClick))
+          playerGrid.forEach(div => div.addEventListener('click', shipClick))
 
         }
-
         rotationButtons.forEach(btn => btn.addEventListener('click', selectRotation))
-
-
       }
       shipButtons.forEach(btn => btn.addEventListener('click', shipSelector))
 
@@ -274,14 +354,14 @@ function init() {
         if (randomDirection === 1) {
           direction = 10
         }
-        const randomStart = Math.abs(Math.floor(Math.random() * compGridItems.length - (compShip.directions[0].length * direction)))
-        const isTaken = current.some(index => compGridItems[randomStart + index].classList.contains('used'))
+        const randomStart = Math.abs(Math.floor(Math.random() * compGrid.length - (compShip.directions[0].length * direction)))
+        const isTaken = current.some(index => compGrid[randomStart + index].classList.contains('used'))
         const atRightEdge = current.some(index => (randomStart + index) % gridWidth === gridWidth - 1)
         const atLeftEdge = current.some(index => (randomStart + index) % gridWidth === 0)
 
         if (!isTaken && (!atRightEdge || !atLeftEdge)) {
           current.forEach(index => {
-            compGridItems[randomStart + index].classList.add('used', compShip.name, 'comp')
+            compGrid[randomStart + index].classList.add('used', compShip.name, 'comp')
           })
         } else {
           addShip(compShip)
@@ -303,7 +383,6 @@ function init() {
   // Function for starting game
   function startGame() {
     startButton.disabled = true
-    const compGridItems = document.querySelectorAll('#computer div')
     startButtonContainer.innerHTML = ''
 
 
@@ -315,9 +394,9 @@ function init() {
         e.target.classList.remove('target-hover')
         e.target.style.cursor = null
       }
-      compGridItems.forEach(div => div.addEventListener('mouseleave', targetMouseLeave))
+      compGrid.forEach(div => div.addEventListener('mouseleave', targetMouseLeave))
     }
-    compGridItems.forEach(div => div.addEventListener('mouseenter', targetMouseEnter))
+    compGrid.forEach(div => div.addEventListener('mouseenter', targetMouseEnter))
 
 
 
@@ -344,24 +423,24 @@ function init() {
         audio.volume = 0.2
         audio.play()
       }
-      compGridItems.forEach(div => div.removeEventListener('click', fire))
-      
+      compGrid.forEach(div => div.removeEventListener('click', fire))
+
       // Check if all ships have been sunk
       const allPlayerSunk = compShips.every(ship => ship.sunk === true)
       if (allPlayerSunk === true) {
         startButtonContainer.innerHTML = 'All computer ships have been sunk! Player wins'
-        compGridItems.forEach(div => div.removeEventListener('mouseenter', targetMouseEnter))
+        compGrid.forEach(div => div.removeEventListener('mouseenter', targetMouseEnter))
       } else {
         setTimeout(compFire, 2000)
       }
     }
-    compGridItems.forEach(div => div.addEventListener('click', fire))
+    compGrid.forEach(div => div.addEventListener('click', fire))
 
 
 
     // Function for the computer fire 
     function compFire() {
-      const randomTarget = playerGridItems[Math.floor(Math.random() * playerGridItems.length)]
+      const randomTarget = playerGrid[Math.floor(Math.random() * playerGrid.length)]
       if (randomTarget.classList.contains('used') && !randomTarget.classList.contains('targeted')) {
         randomTarget.classList.add('hit', 'targeted')
         const playerShipHit = randomTarget.classList[1]
@@ -385,10 +464,10 @@ function init() {
         compFire()
       }
       const allCompSunk = playerShips.every(ship => ship.sunk === true)
-      compGridItems.forEach(div => div.addEventListener('click', fire))
+      compGrid.forEach(div => div.addEventListener('click', fire))
       if (allCompSunk === true) {
         shipChoice.innerHTML = '<p>All player ships have been sunk! Computer wins</p>'
-        compGridItems.forEach(div => div.removeEventListener('click', fire))
+        compGrid.forEach(div => div.removeEventListener('click', fire))
       }
     }
 
