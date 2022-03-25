@@ -32,9 +32,11 @@ When they click the board, the ship is placed:
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.22_pt4nrj.png "Ship hover")
 
 The player adds ships in any order, but cannot a place over another ship:
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.33_krhhaw.png "Adding 2nd ship")
 
 Once the player has added all their ships, the "Generate computer's ships" button appears. Clicking this, undisables the "Start game" button.
+
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.41.00_ccv9ad.png "Generate CPU ships")
 
 After clicking "Start game" the player can hover over the CPU's board to aim their strike. Clicking the square fires the missile.
