@@ -19,6 +19,7 @@ Languages/tools used
 Game walkthrough
 ------
 
+### Game set up
 Clicking "Set up game" allows the player to select a ship, and upon doing so can select a rotation
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.04_kwwzu1.png "Choose ship")
@@ -39,6 +40,8 @@ Once the player has added all their ships, the "Generate computer's ships" butto
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.41.00_ccv9ad.png "Generate CPU ships")
 
+### Game start
+
 After clicking "Start game" the player can hover over the CPU's board to aim their strike. Clicking the square fires the missile.
 
 ![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.41.11_rxvqwv.png "Aim")
@@ -49,13 +52,79 @@ A miss is indicated with a white square, a hit with a red one:
 
 When a square containing a ship is hit, the text indicated the hit ship:
 
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148915/Habit_tracker_app/Screenshot_2022-03-24_at_18.14.42_dgd55y.png "Logo Title Text 1")
+![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148915/Habit_tracker_app/Screenshot_2022-03-24_at_18.14.42_dgd55y.png "Hit ship")
+
+When a whole ship is sunk, this is indicated in the text too:
+
+![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648210845/Habit_tracker_app/Screenshot_2022-03-25_at_12.20.31_h80tzl.png "Sunk ship")
+
+Once all ships of one of the boards have been sunk, the game is ended and a winner declared:
+
+![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148915/Habit_tracker_app/Screenshot_2022-03-24_at_19.02.31_ljk9iu.png "Logo Title Text 1")
+
+The player can then reset the game by clicking the "Reset game" button
+
 
 Code examples
 ------
+Creating game grids:
 
-How I worked
-------
+```javascript
+  const grids = document.querySelectorAll('.grid')
+  const gridWidth = 10
+  const gridSize = gridWidth * gridWidth
+  const cells = []
+```
+
+```javascript
+  function createGrid(grid, index) {
+    for (let i = 0; i < gridSize; i++) {
+      const cell = document.createElement('div')
+      cell.id = i
+      if (index < 1) cell.classList.add('player')
+      else cell.classList.add('computer')
+      grid.appendChild(cell)
+      cells.push(cell)
+    }
+  }
+  grids.forEach((div, index) => {
+    return createGrid(div, index)
+  })
+```
+
+Adding computer ships:
+
+```javascript
+function addComputerShips() {
+      document.querySelector('.comp-ship').disabled = true
+      rotationText.innerHTML = ''
+      function addShip(compShip) {
+        const randomDirection = parseFloat(Math.floor(Math.random() * compShip.directions.length))
+        const current = compShip.directions[randomDirection]
+        let direction
+        if (randomDirection === 0) {
+          direction = 1
+        }
+        if (randomDirection === 1) {
+          direction = 10
+        }
+        const randomStart = Math.abs(Math.floor(Math.random() * compGrid.length - (compShip.directions[0].length * direction)))
+        const isTaken = current.some(index => compGrid[randomStart + index].classList.contains('used'))
+        const atRightEdge = current.some(index => (randomStart + index) % gridWidth === gridWidth - 1)
+        const atLeftEdge = current.some(index => (randomStart + index) % gridWidth === 0)
+        if (!isTaken && (!atRightEdge || !atLeftEdge)) {
+          current.forEach(index => {
+            compGrid[randomStart + index].classList.add('used', compShip.name, 'comp')
+          })
+        } else {
+          addShip(compShip)
+        }
+        startButton.disabled = false
+      }
+      compShips.forEach(ship => addShip(ship))
+    }
+  }
+  ```
 
 What I got from the project
 ------
@@ -69,4 +138,4 @@ Logic for the computer
 
 Future features
 ------
-Smart logic for the computer
+Smarter logic for the computer
