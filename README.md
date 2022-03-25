@@ -67,32 +67,32 @@ The player can then reset the game by clicking the "Reset game" button
 
 Code examples
 ------
-Creating game grids:
+A key element is that the player ships are objects, with properties that are modified throughout the game:
 
 ```javascript
-  const grids = document.querySelectorAll('.grid')
-  const gridWidth = 10
-  const gridSize = gridWidth * gridWidth
-  const cells = []
-```
+const startingPlayerShips = [
+    {
+      name: 'carrier',
+      length: 5,
+      hits: 0,
+      sunk: false,
+      used: 0,
+      directions: [
+        [0, 1, 2, 3, 4],
+        [0, gridWidth, gridWidth * 2, gridWidth * 3, gridWidth * 4]
+      ],
+    },
+    ...
+  ```
+
+A ship is 'placed' by adding classes to the grid div e.g.
 
 ```javascript
-  function createGrid(grid, index) {
-    for (let i = 0; i < gridSize; i++) {
-      const cell = document.createElement('div')
-      cell.id = i
-      if (index < 1) cell.classList.add('player')
-      else cell.classList.add('computer')
-      grid.appendChild(cell)
-      cells.push(cell)
-    }
-  }
-  grids.forEach((div, index) => {
-    return createGrid(div, index)
-  })
-```
+...forEach(div => playerGrid[div.id].classList.add('used', playerShip.name))
+  ```
 
-Adding computer ships:
+
+Adding both player and CPU ships uses the directions key on the ship object, and ensures that the ships can't be placed off the board or on a square that is already taken.
 
 ```javascript
 function addComputerShips() {
@@ -125,6 +125,14 @@ function addComputerShips() {
     }
   }
   ```
+  A ship is hit or a miss is assigned, using classses e.g. 
+  
+  ```javascript
+      if (e.target.classList.contains('used') && !e.target.classList.contains('hit') && !e.target.classList.contains('miss')) {
+        e.target.classList.add('hit')
+        ...
+  ```
+ 
 
 What I got from the project
 ------
