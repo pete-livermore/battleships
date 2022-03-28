@@ -125,7 +125,7 @@ function addComputerShips() {
     }
   }
   ```
-  A ship is hit or a miss is assigned, using classses e.g. 
+  A ship is hit or a miss is assigned, using classes e.g. 
   
   ```javascript
       if (e.target.classList.contains('used') && !e.target.classList.contains('hit') && !e.target.classList.contains('miss')) {
@@ -135,7 +135,7 @@ function addComputerShips() {
 
 What I got from the project
 ------
-First and foremost, this project required me to get to grips with DOM manipluation - selecting the correct nodes, understanding what they represent in JS (e.g. NodeList) and learning how to alter them in the correct way and sequence. I learned a lot about query selectors and event listeners - what exactly they are doing with respect to the DOM and how to best use them to achieve event-based interactivity on the page.
+First and foremost, this project required me to get to grips with DOM manipulation - selecting the correct nodes, understanding what they represent in JS (e.g. NodeList) and learning how to alter them in the correct way and sequence. I learned a lot about query selectors and event listeners - what exactly they are doing with respect to the DOM and how to best use them to achieve event-based interactivity on the page.
 
 More fundamentally though, it helped me to better understand JavaScript functions. Because the game has an order/flow, I used a number of nested functions, which improved my understanding of variable scope, and declaring vs calling functions.
 
