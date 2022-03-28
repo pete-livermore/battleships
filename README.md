@@ -132,18 +132,19 @@ function addComputerShips() {
         e.target.classList.add('hit')
         ...
   ```
- 
 
 What I got from the project
 ------
-### General points
-I felt that this game was particularly 
+First and foremost, this project required me to get to grips with DOM manipluation - selecting the correct nodes, understanding what they represent in JS (e.g. NodeList) and learning how to alter them in the correct way and sequence. I learned a lot about query selectors and event listeners - what exactly they are doing with respect to the DOM and how to best use them to achieve event-based interactivity on the page.
 
-The biggest challenge for me was around the computers. Firstly the ships need to be randomly placed, but without touching or overlapping, which requires a considerable amount of logic and recursion. Secondly when the computer attacks the player's board, if it hits a ship, it should try to hit adjacent squares in all directions until it has established that the ship has been sunk.
+More fundamentally though, it helped me to better understand JavaScript functions. Because the game has an order/flow, I used a number of nested functions, which improved my understanding of variable scope, and declaring vs calling functions.
 
-### Technical points
-Logic for the computer
+Because I used objects to store the data for the ships, I was initially a little confused by my reset function not 'resetting' the ship objects correctly. Through further reading, I was able to solve this, as I was introduced to object reference and spread syntax, which I ultimately went on to cover in lessons.
+
+I was quite proud of how I was able to control placement of the player's ships, without touching or overlapping, in tandem with the hover effect. Because this game involves placing a multi-square object on the grid, it took a reasonable amount of thought and recursion to 'add' ships to the board in only the available squares. 
+
+What I found most challenging, partly due to time constraints, was establishing a 'smart' CPU so that when the computer attacks the player's board, if it hits a ship, it tries to hit adjacent squares in all directions until it has established that the ship has been sunk. There was such a depth to this logic, with so many different scenarios, that it became impossible for me to complete this functionality in the given timeframe and so I had to resort to having the CPU make random attacks on the player's board.
 
 Future features
 ------
-Smarter logic for the computer
+As mentioned above, I began work on smarter logic for the computer when firing at the player's board and I plan to finish this to make the game more enjoyable and challenging for the player. So far I mapped the logic and have begun translating that to JS in pseudocode.
