@@ -148,3 +148,7 @@ What I found most challenging, partly due to time constraints, was establishing 
 Future features
 ------
 As mentioned above, I began work on smarter logic for the computer when firing at the player's board and I plan to finish this to make the game more enjoyable and challenging for the player. So far I mapped the logic and have begun translating that to JS in pseudocode.
+
+Although the basic UI of the app is generally responsive, I would also like to improve the user experience on mobile. For example, the boards are currently stacked vertically on smaller screens, which works aesthetically but doesn't allow the user to see the full game situation.
+
+Finally, since I am capturing hit data during the game, I would also like to add a scoreboard (ships hit/sunk etc) so that it is clearer what the current status of the game is.
