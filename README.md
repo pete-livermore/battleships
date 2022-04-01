@@ -1,12 +1,13 @@
-# Battleships - a turn-based vanilla JavaScript game | GA project 1
+# Battleships - a turn-based Vanilla JavaScript game | GA project 1
 https://user-images.githubusercontent.com/96052888/159977037-638b484b-bb8d-4023-9e07-8e36b0c0f5e2.mov
 
 In this implementation of [Battleships](https://en.wikipedia.org/wiki/Battleship_(game)), a single player can add their fleet of ships to a game board, randomly generate a ship layout for the computer, and then the player and computer alternate turns in firing at each other's boards - with hits show in red and misses in white. Once all ships on either board have been sunk, the game ends and a victor is declared.
 
-The game has been deployed with GitHub Pages and is available [here](https://pete-livermore.github.io/battleships/)
+The game has been deployed with GitHub Pages and is available [here](https://pete-livermore.github.io/battleships/).
 
 Brief & timeframe
 ------
+* Solo project
 * Build a functioning browser game with pure JavaScript in 8 days.
 
 Languages/tools used
@@ -132,6 +133,12 @@ function addComputerShips() {
         e.target.classList.add('hit')
         ...
   ```
+How I worked
+------
+### Process
+1. Generated a game vision with a list of must-have and nice-to-have features
+2. Wireframed the UI, including different views for the different user interactions
+3. Pseudocoded the different game features
 
 What I got from the project
 ------
