@@ -20,44 +20,7 @@ Languages/tools used
 Game walkthrough
 ------
 
-### Game set up
-Clicking "Set up game" allows the player to select a ship, and upon doing so can select a rotation
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.04_kwwzu1.png "Choose ship")
-
-Once a rotation is selected, the player can hover over acceptable spaces to see where they can place the ship (bounded by edges of board):
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.09_rcna0i.png "Choose rotation")
-
-When they click the board, the ship is placed:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.22_pt4nrj.png "Ship hover")
-
-The player adds ships in any order, but cannot a place over another ship:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.40.33_krhhaw.png "Adding 2nd ship")
-
-Once the player has added all their ships, the "Generate computer's ships" button appears. Clicking this, enables the "Start game" button.
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.41.00_ccv9ad.png "Generate CPU ships")
-
-### Game start
-
-After clicking "Start game" the player can hover over the CPU's board to aim their strike. Clicking the square fires the missile.
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.41.11_rxvqwv.png "Aim")
-
-A miss is indicated with a white square, a hit with a red one:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148916/Habit_tracker_app/Screenshot_2022-03-24_at_17.41.19_nam1e0.png "Miss")
-
-When a square containing a ship is hit, the text indicated the hit ship:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648148915/Habit_tracker_app/Screenshot_2022-03-24_at_18.14.42_dgd55y.png "Hit ship")
-
-When a whole ship is sunk, this is indicated in the text too:
-
-![alt text](https://res.cloudinary.com/di7ndofao/image/upload/v1648210845/Habit_tracker_app/Screenshot_2022-03-25_at_12.20.31_h80tzl.png "Sunk ship")
+https://user-images.githubusercontent.com/96052888/162738028-fc766c33-3405-4eb6-addb-72f450d2691a.mp4
 
 Once all ships of one of the boards have been sunk, the game is ended and a winner declared:
 
