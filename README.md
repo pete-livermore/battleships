@@ -78,52 +78,51 @@ A key element of the process was establishing ship placement. For this, I decide
 
 ```javascript
   function addPlayerShip(e) {
-            let currentLocation
-            const startLocation = parseFloat(e.target.id)
-            if (playerShipRotation === 'Horizontal') {
-              currentLocation = playerShip.directions[0]
-            }
-            if (playerShipRotation === 'Vertical') {
-              currentLocation = playerShip.directions[1]
-            }
-            const isTaken = currentLocation.some(index => playerGrid[startLocation + index].classList.contains('used'))
-            const atRightEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === gridWidth - 1)
-            const atLeftEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === 0)
-            if (!isTaken && (!atRightEdge || !atLeftEdge)) {
-              currentLocation.forEach(index => {
-                playerGrid[startLocation + index].classList.add('hover')
-              })
-            }
+     let currentLocation
+     const startLocation = parseFloat(e.target.id)
+     if (playerShipRotation === 'Horizontal') {
+        currentLocation = playerShip.directions[0]
+     }
+     if (playerShipRotation === 'Vertical') {
+        currentLocation = playerShip.directions[1]
+     }
+     const isTaken = currentLocation.some(index => playerGrid[startLocation + index].classList.contains('used'))
+     const atRightEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === gridWidth - 1)
+     const atLeftEdge = currentLocation.some(index => (startLocation + index) % gridWidth % gridWidth === 0)
+     if (!isTaken && (!atRightEdge || !atLeftEdge)) {
+         currentLocation.forEach(index => {
+             playerGrid[startLocation + index].classList.add('hover')
+         })
+     }
 ```
 
 While the player can click on grid cells to add a ship, I decided that the CPU ship adding function needed to be random:
 
 ```javascript
  function addShip(compShip) {
-        const randomDirection = parseFloat(Math.floor(Math.random() * compShip.directions.length))
-        const current = compShip.directions[randomDirection]
-        let direction
-        if (randomDirection === 0) {
-          direction = 1
-        }
-        if (randomDirection === 1) {
-          direction = 10
-        }
-        const randomStart = Math.abs(Math.floor(Math.random() * compGrid.length - (compShip.directions[0].length * direction)))
-        const isTaken = current.some(index => compGrid[randomStart + index].classList.contains('used'))
-        const atRightEdge = current.some(index => (randomStart + index) % gridWidth === gridWidth - 1)
-        const atLeftEdge = current.some(index => (randomStart + index) % gridWidth === 0)
-        if (!isTaken && (!atRightEdge || !atLeftEdge)) {
-          current.forEach(index => {
-            compGrid[randomStart + index].classList.add('used', compShip.name, 'comp')
-          })
-        } else {
-          addShip(compShip)
-        }
-        startButton.disabled = false
-      }
-      compShips.forEach(ship => addShip(ship))
+    const randomDirection = parseFloat(Math.floor(Math.random() * compShip.directions.length))
+    const current = compShip.directions[randomDirection]
+    let direction
+    if (randomDirection === 0) {
+       direction = 1
     }
+    if (randomDirection === 1) {
+       direction = 10
+    }
+    const randomStart = Math.abs(Math.floor(Math.random() * compGrid.length - (compShip.directions[0].length * direction)))
+    const isTaken = current.some(index => compGrid[randomStart + index].classList.contains('used'))
+    const atRightEdge = current.some(index => (randomStart + index) % gridWidth === gridWidth - 1)
+    const atLeftEdge = current.some(index => (randomStart + index) % gridWidth === 0)
+    if (!isTaken && (!atRightEdge || !atLeftEdge)) {
+       current.forEach(index => {
+          compGrid[randomStart + index].classList.add('used', compShip.name, 'comp')
+       })
+    } else {
+        addShip(compShip)
+    }
+    startButton.disabled = false
+  }
+  compShips.forEach(ship => addShip(ship))
 ```
 
 The player fire function uses an event listener that listens for a click on the CPUs grid. I then assigned a hit or a miss to a ship using classes e.g.
